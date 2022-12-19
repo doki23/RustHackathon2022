@@ -78,3 +78,5 @@ time curl -XPUT 'http://root:@127.0.0.1:8000/v1/streaming_load' -H 'insert_sql: 
 ```sql
 SELECT * FROM lineorder LIMIT 10
 ```
+# Performance
+TODO
