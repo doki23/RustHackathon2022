@@ -105,7 +105,11 @@ time curl -XPUT 'http://root:@127.0.0.1:8000/v1/streaming_load' -H 'insert_sql: 
 
 5. 查询
 ```sql
-SELECT * FROM lineorder LIMIT 10
+## pa
+curl -w 'Time: %{time_total}\n' http://root@localhost:8124\?max_storage_io_requests\=16 -d "select * from lineorder limit 10000000" 2>&1 | grep -e '^Time: ' | sed 's/Time: //'
+
+## parquet
+curl -w 'Time: %{time_total}\n' http://root@localhost:8124\?max_storage_io_requests\=16 -d "select * from lineorder_parquet limit 10000000" 2>&1 | grep -e '^Time: ' | sed 's/Time: //'
 ```
 # Performance
 TODO
