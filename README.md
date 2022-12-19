@@ -102,7 +102,7 @@ time curl -XPUT 'http://root:@127.0.0.1:8000/v1/streaming_load' -H 'insert_sql: 
 time curl -XPUT 'http://root:@127.0.0.1:8000/v1/streaming_load' -H 'insert_sql: insert into lineorder_parquet format CSV' -F 'upload=@"./data/lineorder.tbl"'
 ```
 
-5. 查询
+5. 查询耗时对比
 ```sql
 ### pa
 curl -w 'Time: %{time_total}\n' http://root@localhost:8124\?max_storage_io_requests\=16 -d "select * from lineorder limit 10000000" 2>&1 | grep -e '^Time: ' | sed 's/Time: //'
