@@ -15,7 +15,7 @@
 ```
 git clone https://github.com/doki23/RustHackathon2022.git --depth=1
 
-cd databend
+cd RustHackathon2022
 
 cargo build --release
 
