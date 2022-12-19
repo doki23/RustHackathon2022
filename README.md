@@ -2,7 +2,7 @@
 
 # Introduction
 
-[PA](https://github.com/sundy-li/pa) -- 一个自研的开放式的无缝对接 apache/arrow 的高性能存储格式.
+[PA](https://github.com/sundy-li/pa) -- 一个无缝对接 apache/arrow 的高性能存储格式.
 
 [Databend](https://github.com/datafuselabs/databend) 是一款现代化的,高性能云原生分析型实时数据仓库. 它强大的分析能力来自于 apache/arrow -- 一款高性能向量化计算库. 而它核心的数据存储格式, 是 apache/parquet -- 一个兼具性能,高压缩比的开放式的数据存储格式.
 
