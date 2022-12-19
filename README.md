@@ -60,6 +60,32 @@ ENGINE=FUSE STORAGE_FORMAT='native';
 ```
 STORAGE_FORMAT='native' 即切换到pa格式, 默认是parquet
 
+下面建parquet表, 做对比用
+
+```sql
+CREATE TABLE lineorder_parquet
+(
+    LO_ORDERKEY             INT,
+    LO_LINENUMBER           SMALLINT,
+    LO_CUSTKEY              INT,
+    LO_PARTKEY              INT,
+    LO_SUPPKEY              INT,
+    LO_ORDERDATE            Date,
+    LO_ORDERPRIORITY        VARCHAR,
+    LO_SHIPPRIORITY         SMALLINT,
+    LO_QUANTITY             SMALLINT,
+    LO_EXTENDEDPRICE        INT,
+    LO_ORDTOTALPRICE        INT,
+    LO_DISCOUNT             SMALLINT,
+    LO_REVENUE              INT,
+    LO_SUPPLYCOST           INT,
+    LO_TAX                  SMALLINT,
+    LO_COMMITDATE           DATE,
+    LO_SHIPMODE             VARCHAR
+)
+ENGINE=FUSE;
+```
+
 4. 载入测试数据
 
 ```
