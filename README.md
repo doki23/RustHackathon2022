@@ -2,15 +2,15 @@
 
 # Introduction
 
-本次参赛作品是为databend集成[PA](https://github.com/sundy-li/pa)(一个无缝对接 apache/arrow 的高性能存储格式)以提升io性能.
+本次参赛作品是为 Databend 集成 [PA](https://github.com/sundy-li/pa) (一个无缝对接 Apache/Arrow 的高性能存储格式)以提升io性能.
 
-[Databend](https://github.com/datafuselabs/databend) 是一款现代化的,高性能云原生分析型实时数据仓库. 它强大的分析能力来自于 apache/arrow -- 一款高性能向量化计算库. 而它核心的数据存储格式, 是 apache/parquet -- 一个兼具性能,高压缩比的开放式的数据存储格式.
+[Databend](https://github.com/datafuselabs/databend) 是一款现代化的,高性能云原生分析型实时数据仓库. 它强大的分析能力来自于 apache/arrow -- 一款高性能向量化计算库. 而它核心的数据存储格式, 是 Apache/Parquet -- 一个兼具性能,高压缩比的开放式的数据存储格式.
 
-尽管依靠这些优秀的第三方库,Databend 表现出了卓越的性能,但当我们深入了解之后依然发现,数据从 parquet 转换成 arrow 时,消耗了大量的 cpu 在 memcopy 上. 于是我们开始思考, 是否能够找到一种与 arrow 无缝对接的存储格式, 去掉中间 decode 的开销, 直接将原始的字节流拷贝到 arrow 的缓冲区中, 一步到位? 就这样, PA 诞生了.
+尽管依靠这些优秀的第三方库,Databend 表现出了卓越的性能,但当我们深入了解之后依然发现,数据从 Parquet 转换成 Arrow 时,消耗了大量的 cpu 在 memcopy 上. 于是我们开始思考, 是否能够找到一种与 Arrow 无缝对接的存储格式, 去掉中间 decode 的开销, 直接将原始的字节流拷贝到 Arrow 的缓冲区中, 一步到位? 就这样, PA 诞生了.
 
 # Quick Start
 
-1. 构建&运行databend
+1. 构建&运行Databend
 
 ```
 git clone https://github.com/doki23/RustHackathon2022.git --depth=1
@@ -111,4 +111,24 @@ curl -w 'Time: %{time_total}\n' http://root@localhost:8124\?max_storage_io_reque
 curl -w 'Time: %{time_total}\n' http://root@localhost:8124\?max_storage_io_requests\=16 -d "select * from lineorder_parquet ignore_result"
 ```
 # Performance
-TODO
+[benchmark](https://github.com/Kikkon/parquet-benchmark)
+
+与 Pyarrow 以及 Arrow2 进行性能对比，结果如下
+> 可能存在部分数据有误以及确实，后续会继续更新 benchmark 结果，目前 PA 暂不支持 Snappy 压缩，因此也不进行压缩读写性能对比。
+
+### Write uncompressed
+![write uncompressed i64](docs/doc/2022-hackathon/1.png)
+
+![write uncompressed bool](docs/doc/2022-hackathon/2.png)
+
+> 存在性能问题，还需要排查 benchmark 逻辑 或者 代码本身
+![write uncompressed utf8](docs/doc/2022-hackathon/4.png)
+
+### Read uncompressed
+
+![read uncompressed i64](docs/doc/2022-hackathon/3.png)
+
+![read uncompressed utf8](docs/doc/2022-hackathon/5.png)
+
+![read uncompressed bool](docs/doc/2022-hackathon/6.png)
+
