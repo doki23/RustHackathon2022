@@ -13,7 +13,7 @@
 1. 构建&运行databend
 
 ```
-git clone -b fuse-native-format https://github.com/doki23/databend.git --depth=1
+git clone https://github.com/doki23/RustHackathon2022.git --depth=1
 
 cd databend
 
