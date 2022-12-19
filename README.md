@@ -72,7 +72,7 @@ docker build . -t ssb-dbgen:latest
 # -s 3 => scale = 3g
 docker run -v $(pwd)/data:/data --rm ssb-dbgen:latest -s 3 -T l
 
-time curl -XPUT 'http://root:@127.0.0.1:8000/v1/streaming_load' -H 'insert_sql: insert into lineorder format CSV' -F 'upload=@"./lineorder.tbl"'
+time curl -XPUT 'http://root:@127.0.0.1:8000/v1/streaming_load' -H 'insert_sql: insert into lineorder format CSV' -F 'upload=@"./data/lineorder.tbl"'
 ```
 
 5. 查询
