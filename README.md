@@ -20,8 +20,11 @@ Rust Hackathon 2022
 
 ```
 git clone -b fuse-native-format https://github.com/doki23/databend.git --depth=1
+
 cd databend
+
 cargo build --release
+
 BUILD_PROFILE=release scripts/ci/deploy/databend-query-standalone-embedded-meta.sh
 ```
 
@@ -66,8 +69,11 @@ ENGINE=FUSE STORAGE_FORMAT='native';
 
 ```
 git clone https://github.com/doki23/ssb-dbgen.git
+
 cd ssb-dbgen
+
 docker build . -t ssb-dbgen:latest
+
 # -s 3 => scale = 3g
 docker run -v $(pwd)/data:/data --rm ssb-dbgen:latest -s 3 -T l
 
