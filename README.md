@@ -58,6 +58,7 @@ CREATE TABLE lineorder
 )
 ENGINE=FUSE STORAGE_FORMAT='native';
 ```
+STORAGE_FORMAT='native' 即切换到pa格式, 默认是parquet
 
 4. 载入测试数据
 
