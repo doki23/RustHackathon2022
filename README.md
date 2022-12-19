@@ -86,7 +86,7 @@ CREATE TABLE lineorder_parquet
 ENGINE=FUSE;
 ```
 
-4. 载入测试数据
+4. 载入测试数据(2gb)
 
 ```
 git clone https://github.com/doki23/ssb-dbgen.git
@@ -95,7 +95,6 @@ cd ssb-dbgen
 
 docker build . -t ssb-dbgen:latest
 
-### -s 3 => scale = 3g
 docker run -v $(pwd)/data:/data --rm ssb-dbgen:latest -s 3 -T l
 
 time curl -XPUT 'http://root:@127.0.0.1:8000/v1/streaming_load' -H 'insert_sql: insert into lineorder format CSV' -F 'upload=@"./data/lineorder.tbl"'
