@@ -1,0 +1,150 @@
+[workspace.package]
+version = "0.1.0"
+authors = ["Databend Authors <opensource@datafuselabs.com>"]
+license = "Apache-2.0"
+publish = false
+edition = "2021"
+
+[workspace]
+members = [
+    # Binaries
+    "src/binaries",
+    # Common
+    "src/common/arrow",
+    "src/common/auth",
+    "src/common/base",
+    "src/common/building",
+    "src/common/cache",
+    "src/common/exception",
+    "src/common/grpc",
+    "src/common/hashtable",
+    "src/common/http",
+    "src/common/io",
+    "src/common/metrics",
+    "src/common/tracing",
+    "src/common/storage",
+    # Query
+    "src/query/ast",
+    "src/query/codegen",
+    "src/query/config",
+    "src/query/catalog",
+    "src/query/datablocks",
+    "src/query/sharing",
+    "src/query/sharing-endpoint",
+    "src/query/datavalues",
+    "src/query/expression",
+    "src/query/formats",
+    "src/query/functions",
+    "src/query/functions-v2",
+    "src/query/management",
+    "src/query/pipeline/core",
+    "src/query/pipeline/sinks",
+    "src/query/pipeline/sources",
+    "src/query/pipeline/transforms",
+    "src/query/settings",
+    "src/query/sql",
+    "src/query/storages/cache",
+    "src/query/storages/factory",
+    "src/query/storages/fuse/fuse",
+    "src/query/storages/fuse/fuse-result",
+    "src/query/storages/hive/hive",
+    "src/query/storages/hive/hive-meta-store",
+    "src/query/storages/index",
+    "src/query/storages/information-schema",
+    "src/query/storages/memory",
+    "src/query/storages/null",
+    "src/query/storages/table-meta",
+    "src/query/storages/random",
+    "src/query/storages/share",
+    "src/query/storages/stage",
+    "src/query/storages/system",
+    "src/query/storages/view",
+    "src/query/storages/parquet",
+    "src/query/storages/pruner",
+    "src/query/users",
+    # databend-query
+    "src/query/service",
+    # Meta
+    "src/meta/api",
+    "src/meta/app",
+    "src/meta/embedded",
+    "src/meta/raft-store",
+    "src/meta/sled-store",
+    "src/meta/stoerr",
+    "src/meta/store",
+    "src/meta/types",
+    # meta proto
+    "src/meta/proto-conv",
+    "src/meta/protos",
+    # databend-meta
+    "src/meta/service",
+    # sqllogictest
+    "tests/sqllogictests",
+]
+
+[workspace.dependencies]
+# databend maintains:
+openraft = { git = "https://github.com/drmingdrmer/openraft", tag = "v0.7.4-alpha.3" }
+sled = { git = "https://github.com/datafuse-extras/sled", tag = "v0.34.7-datafuse.1", default-features = false }
+
+# error
+anyhow = { version = "1.0.65" }
+anyerror = { version = "=0.1.7" }
+thiserror = { version = "1" }
+
+# CLI
+clap = { version = "3.2.22", features = ["derive", "env"] }
+
+# serialization
+prost = { version = "0.11.0" }
+serde = { version = "1.0.145", features = ["derive", "rc"] }
+serde_json = { version = "1.0.85", default-features = false, features = ["preserve_order"] }
+
+# chrono
+chrono = { version = "0.4.22", features = ["serde"] }
+chrono-tz = "0.6.3"
+
+[profile.release]
+debug = 1
+lto = "thin"
+overflow-checks = false
+codegen-units = 1       # Reduce number of codegen units to increase optimizations.
+
+[profile.release.package]
+arrow2 = { codegen-units = 4 }
+common-functions = { codegen-units = 16 }
+databend-query = { codegen-units = 4 }
+
+[profile.bench]
+debug = true
+overflow-checks = false
+
+[profile.dev]
+split-debuginfo = "unpacked"
+overflow-checks = false
+# wait until https://github.com/rust-lang/rust/issues/100142 fixed
+incremental = false
+
+[profile.dev.package]
+addr2line = { opt-level = 3 }
+adler = { opt-level = 3 }
+gimli = { opt-level = 3 }
+miniz_oxide = { opt-level = 3 }
+object = { opt-level = 3 }
+rustc-demangle = { opt-level = 3 }
+
+[profile.test]
+opt-level = 0
+debug = 0
+codegen-units = 16
+lto = false
+debug-assertions = true
+overflow-checks = true
+rpath = false
+
+[patch.crates-io]
+# If there are dependencies that need patching, they can be listed below.
+# For example:
+# arrow-format = { git = "https://github.com/datafuse-extras/arrow-format", rev = "78dacc1" }
+parquet2 = { git = "https://github.com/jorgecarleitao/parquet2", rev = "fb08b72" }
+opendal = { git = "https://github.com/datafuselabs/opendal", rev = "2193ebf" }

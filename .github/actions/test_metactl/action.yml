@@ -1,0 +1,30 @@
+name: "Test metactl"
+description: ""
+inputs:
+  profile:
+    description: "The profile for this test"
+    required: true
+    default: "debug"
+  target:
+    description: ""
+    required: true
+    default: "x86_64-unknown-linux-gnu"
+runs:
+  using: "composite"
+  steps:
+    - name: Download artifact
+      uses: ./.github/actions/artifact_download
+      with:
+        profile: ${{ inputs.profile }}
+        sha: ${{ github.sha }}
+        target: ${{ inputs.target }}
+
+    - name: Test metactl
+      shell: bash
+      run: |
+        bash ./tests/metactl/test-metactl.sh
+
+    - name: Test metactl restore new cluster
+      shell: bash
+      run: |
+        bash ./tests/metactl/test-metactl-restore-new-cluster.sh

@@ -1,0 +1,41 @@
+[package]
+name = "common-pipeline-sources"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+doctest = false
+test = false
+
+[package.metadata.cargo-machete]
+ignored = ["xml-rs"]
+
+[dependencies]
+async-channel = "1.7.1"
+common-arrow = { path = "../../../common/arrow" }
+common-base = { path = "../../../common/base" }
+common-catalog = { path = "../../catalog" }
+common-datablocks = { path = "../../datablocks" }
+common-datavalues = { path = "../../datavalues" }
+common-exception = { path = "../../../common/exception" }
+common-formats = { path = "../../formats" }
+common-io = { path = "../../../common/io" }
+common-meta-types = { path = "../../../meta/types" }
+common-pipeline-core = { path = "../core" }
+common-settings = { path = "../../settings" }
+
+async-trait = { version = "0.1.57", package = "async-trait-fn" }
+bstr = "1.0.1"
+crossbeam-channel = "0.5.6"
+csv-core = "0.1.10"
+futures = "0.3.24"
+futures-util = "0.3.24"
+opendal = { version = "0.22", features = ["compress"] }
+parking_lot = "0.12.1"
+serde = { workspace = true }
+serde_json = { workspace = true }
+similar-asserts = "1.4.2"
+tracing = "0.1.36"
+typetag = "0.2.3"
+xml-rs = "0.8.4"

@@ -1,0 +1,27 @@
+[package]
+name = "common-cache"
+version = { workspace = true }
+authors = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+edition = { workspace = true }
+
+[lib]
+doctest = false
+test = false
+
+[features]
+heapsize = ["heapsize_"]
+amortized = ["ritelinked/ahash-amortized", "ritelinked/inline-more-amortized"]
+
+[dependencies] # In alphabetical order
+# Github dependencies
+
+# Crates.io dependencies
+ritelinked = { version = "0.3.2", default-features = false, features = ["ahash", "inline-more"] }
+
+[target.'cfg(not(target_os = "macos"))'.dependencies]
+heapsize_ = { package = "heapsize", version = "0.4.2", optional = true }
+
+[dev-dependencies]
+tempfile = "3.3.0"

@@ -1,0 +1,29 @@
+[package]
+name = "common-hashtable"
+version = { workspace = true }
+authors = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+edition = { workspace = true }
+
+[lib]
+doctest = false
+test = false
+
+[dependencies] # In alphabetical order
+# Workspace dependencies
+common-base = { path = "../base" }
+
+# Crates.io dependencies
+
+## Must disable feature "runtime-rng", it will make the hash results unstable in cluster
+ahash = { version = "0.8.2", features = ["no-rng"] }
+bumpalo = "3.10.0"
+cfg-if = "1.0.0"
+libc = "0.2.126"
+ordered-float = { version = "3.1.0", features = ["serde"] }
+primitive-types = "0.12.0"
+semver = "1.0.10"
+
+[dev-dependencies]
+rand = "0.8.5"
