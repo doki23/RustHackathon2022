@@ -1,11 +1,5 @@
 # RustHackathon2022
 
-Rust Hackathon 2022
-
-参赛队伍: 都可以
-
-队员: doki, sundyli, kikkon
-
 # Introduction
 
 [PA](https://github.com/sundy-li/pa) -- 一个自研的开放式的无缝对接 apache/arrow 的高性能存储格式.
