@@ -114,21 +114,35 @@ curl -w 'Time: %{time_total}\n' http://root@localhost:8124\?max_storage_io_reque
 [benchmark](https://github.com/Kikkon/parquet-benchmark)
 
 与 Pyarrow 以及 Arrow2 进行性能对比，结果如下
-> 可能存在部分数据有误以及确实，后续会继续更新 benchmark 结果，目前 PA 暂不支持 Snappy 压缩，因此也不进行压缩读写性能对比。
+> 可能存在部分数据有误以及确实，后续会继续更新 benchmark 结果。
 
 ### Write uncompressed
-![write uncompressed i64](docs/doc/2022-hackathon/1.png)
+![write uncompressed i64](docs/doc/2022-hackathon/i64-write-True.png)
 
-![write uncompressed bool](docs/doc/2022-hackathon/2.png)
+![write uncompressed bool](docs/doc/2022-hackathon/bool-write-True.png)
 
-> 存在性能问题，还需要排查 benchmark 逻辑 或者 代码本身
-![write uncompressed utf8](docs/doc/2022-hackathon/4.png)
+![write uncompressed utf8](docs/doc/2022-hackathon/utf8-write-True.png)
+
+### Write uncompressed
+
+![read uncompressed i64](docs/doc/2022-hackathon/i64-write-False.png)
+
+![read uncompressed bool](docs/doc/2022-hackathon/bool-write-False.png)
+
+![read uncompressed utf8](docs/doc/2022-hackathon/utf8-write-False.png)
+
+### Read compressed
+![write uncompressed i64](docs/doc/2022-hackathon/i64-read-True.png)
+
+![write uncompressed bool](docs/doc/2022-hackathon/bool-read-True.png)
+
+![write uncompressed utf8](docs/doc/2022-hackathon/utf8-read-True.png)
 
 ### Read uncompressed
 
-![read uncompressed i64](docs/doc/2022-hackathon/3.png)
+![read compressed i64](docs/doc/2022-hackathon/i64-read-False.png)
 
-![read uncompressed utf8](docs/doc/2022-hackathon/5.png)
+![read compressed bool](docs/doc/2022-hackathon/bool-read-False.png)
 
-![read uncompressed bool](docs/doc/2022-hackathon/6.png)
+![read compressed utf8](docs/doc/2022-hackathon/utf8-read-False.png)
 
